@@ -1,0 +1,5 @@
+
+- hosts: enigma
+  roles:
+    - role: vim
+    - role: base

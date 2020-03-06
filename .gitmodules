@@ -1,0 +1,9 @@
+[submodule "roles/gbolo.docker"]
+	path = roles/gbolo.docker
+	url = https://github.com/gbolo/ansible-role-docker.git
+[submodule "roles/gbolo.nginx"]
+	path = roles/gbolo.nginx
+	url = https://github.com/geerlingguy/ansible-role-nginx.git
+[submodule "roles/geerlingguy.nginx"]
+	path = roles/geerlingguy.nginx
+	url = https://github.com/geerlingguy/ansible-role-nginx.git

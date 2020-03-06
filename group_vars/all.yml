@@ -1,0 +1,12 @@
+
+production_users:
+  - {username: hvarg, ssh_key: ../files/public-keys/hvarg.pub}
+  - {username: varunr, ssh_key: ../files/public-keys/varunr.pub}
+  - {username: dgarijo, ssh_key: ../files/public-keys/dgarijo.pub}
+
+deploy_user: deploy
+
+vim_config:
+  - 'set tabstop=2'
+  - 'set shiftwidth=2'
+  - 'syntax enable'

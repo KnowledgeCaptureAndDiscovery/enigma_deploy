@@ -1,0 +1,45 @@
+- name: Create the mintui user
+  user:
+    name: "{{deploy_user }}"
+    state: present
+    shell: /bin/bash       # Defaults to /bin/bash
+    system: no             # Defaults to no
+    createhome: yes        # Defaults to yes
+
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: "{{ deploy_user }}"
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - files/public-keys/mosorio.pub
+    - files/public-keys/mosorio-isi.pub
+    - files/public-keys/varunr.pub
+    - files/public-keys/hvarg.pub
+
+- name: Create a production users with sudo
+  user:
+    name: "{{ item.username }}"
+    state: present
+    shell: /bin/bash       # Defaults to /bin/bash
+    system: no             # Defaults to no
+    createhome: yes        # Defaults to yes
+    groups: wheel
+    append: yes
+  loop: "{{  production_users  }}"
+
+- name: Set up multiple authorized keys for production users
+  authorized_key:
+    user: "{{ item.username }}"
+    state: present
+    key: "{{ lookup('file', item.ssh_key) }}"
+  loop: "{{  production_users  }}"
+
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s

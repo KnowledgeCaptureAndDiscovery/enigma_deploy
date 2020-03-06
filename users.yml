@@ -1,0 +1,22 @@
+- hosts: ontosoft
+  vars:
+    - user: hayley
+  tasks:
+    - name: Create a login user
+      user:
+        name: "{{ user }}"
+        state: present
+        shell: /bin/bash
+        home: "/var/lib/{{ user }}" # Defaults to /bin/bash
+        system: no             # Defaults to no
+        createhome: yes
+        password_lock: no # Defaults to yes
+    - name: Set up multiple authorized keys
+      authorized_key:
+        user: "{{ user }}"
+        state: present
+        key: '{{ item }}'
+      with_file:
+        - roles/web/files/public-keys/mosorio.pub
+        - roles/web/files/public-keys/mosorio-isi.pub
+        - roles/web/files/public-keys/hayley.pub

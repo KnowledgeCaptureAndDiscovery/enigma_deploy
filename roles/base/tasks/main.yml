@@ -1,0 +1,3 @@
+---
+- name: Add and configure users
+  include: users.yml

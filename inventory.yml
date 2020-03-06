@@ -1,0 +1,2 @@
+[enigma]
+skc ansible_ssh_host=skc.isi.edu ansible_ssh_user=root ansible_ssh_port=19888
