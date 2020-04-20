@@ -47,3 +47,12 @@ http://skc.isi.edu/disk-portal/
 - Directory:  /var/www/html/disk-portal/
 
 
+#### How to restart it?
+
+### DISK and Wings server
+
+```bash
+ssh skc.isi.edu -l $username -p 19888
+sudo systemctl restart tomcat
+```
+
